@@ -1,0 +1,24 @@
+{
+  "name": "ecommerce-polyglot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Projeto didatico de persistencia poliglota com PostgreSQL e MongoDB",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test test/validation.test.js",
+    "seed": "node scripts/seed.js",
+    "benchmark": "node scripts/benchmark.js",
+    "load-test": "node scripts/load-test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0",
+    "pg": "^8.13.1"
+  }
+}

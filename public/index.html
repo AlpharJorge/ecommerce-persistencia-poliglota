@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nexus Store Workspace</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-left"></div>
+  <div class="ambient ambient-right"></div>
+
+  <main id="painel" class="workspace">
+    <header class="workspace-topbar">
+      <a class="brand" href="#painel" aria-label="Nexus Store">
+        <span class="brand-mark">N</span>
+        <span>Nexus</span>
+      </a>
+      <nav class="top-nav" aria-label="Navegação principal">
+        <a class="active" href="#visao-geral">Visão geral</a>
+        <a href="#catalogo">Catálogo</a>
+        <a href="#carrinho">Carrinho</a>
+        <a href="#pedidos">Pedidos</a>
+      </nav>
+      <div class="top-actions">
+        <span id="status-api" class="connection checking"><i></i> verificando</span>
+        <span class="avatar">CC</span>
+      </div>
+    </header>
+
+    <div class="workspace-layout">
+      <aside class="sidebar">
+        <p class="sidebar-title">Workspace</p>
+        <nav>
+          <a class="selected" href="#visao-geral"><span>▦</span> Visão geral</a>
+          <a href="#catalogo"><span>◇</span> Catálogo</a>
+          <a href="#carrinho"><span>▱</span> Carrinho</a>
+          <a href="#pedidos"><span>○</span> Pedidos</a>
+          <a href="#administracao"><span>⌁</span> Administração</a>
+        </nav>
+      </aside>
+
+      <div class="dashboard">
+        <section id="visao-geral" class="dashboard-heading">
+          <div>
+            <p class="section-kicker">PAINEL PRINCIPAL</p>
+            <h2>Visão geral da loja</h2>
+          </div>
+          <button id="atualizar-catalogo" class="outline-button" type="button">↻ Atualizar dados</button>
+        </section>
+
+        <section class="metrics" aria-label="Indicadores">
+          <article class="metric-card">
+            <span>Produtos ativos</span>
+            <strong id="total-produtos">—</strong>
+            <small class="metric-positive">catálogo disponível</small>
+          </article>
+          <article class="metric-card">
+            <span>Unidades em estoque</span>
+            <strong id="total-estoque">—</strong>
+            <small>fonte: PostgreSQL</small>
+          </article>
+          <article class="metric-card">
+            <span>Valor do catálogo</span>
+            <strong id="valor-catalogo">—</strong>
+            <small>preço × estoque</small>
+          </article>
+          <article class="metric-card metric-accent">
+            <span>Última leitura</span>
+            <strong id="status-cache">—</strong>
+            <small>estratégia Cache-Aside</small>
+          </article>
+        </section>
+
+        <section id="catalogo" class="panel catalog-panel" aria-labelledby="titulo-catalogo">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">CATÁLOGO</p>
+              <h2 id="titulo-catalogo">Produtos disponíveis</h2>
+            </div>
+            <span class="panel-note">Clique para adicionar ao carrinho</span>
+          </div>
+          <div id="lista-produtos" class="produtos" aria-live="polite">
+            <p class="loading">Carregando produtos...</p>
+          </div>
+        </section>
+
+        <div class="bottom-grid">
+          <section id="carrinho" class="panel cart-panel" aria-labelledby="titulo-carrinho">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">MONGODB</p>
+                <h2 id="titulo-carrinho">Carrinho</h2>
+              </div>
+              <span class="user-chip">Camila</span>
+            </div>
+            <div id="itens-carrinho" class="empty-state">Nenhum produto adicionado.</div>
+            <div class="cart-total">
+              <span>Total do pedido</span>
+              <strong id="total-carrinho">R$ 0,00</strong>
+            </div>
+            <button id="finalizar-pedido" class="primary-button full" type="button" disabled>Finalizar com PIX</button>
+            <p id="mensagem-carrinho" class="mensagem" aria-live="polite"></p>
+          </section>
+
+          <section id="pedidos" class="panel order-panel" aria-labelledby="titulo-pedido">
+            <div class="panel-heading">
+              <div>
+                <p class="section-kicker">POSTGRESQL</p>
+                <h2 id="titulo-pedido">Último pedido</h2>
+              </div>
+              <span class="database-dot"></span>
+            </div>
+            <div id="resultado-pedido" class="empty-state order-empty">
+              Finalize uma compra para visualizar o pedido.
+            </div>
+            <form id="form-consulta-pedido" class="order-search">
+              <label for="pedido-id">Consultar pelo código</label>
+              <div>
+                <input id="pedido-id" name="pedidoId" placeholder="UUID do pedido" autocomplete="off">
+                <button type="submit" class="outline-button">Buscar</button>
+              </div>
+            </form>
+          </section>
+        </div>
+
+        <section id="administracao" class="panel admin-panel" aria-labelledby="titulo-admin">
+          <div class="panel-heading">
+            <div>
+              <p class="section-kicker">WRITE-THROUGH</p>
+              <h2 id="titulo-admin">Administração do produto</h2>
+            </div>
+            <span class="panel-note">Atualiza PostgreSQL e invalida o cache</span>
+          </div>
+          <form id="form-produto" class="admin-form">
+            <label>Produto<select id="admin-produto" required></select></label>
+            <label>Preço<input id="admin-preco" type="number" min="0" step="0.01" required></label>
+            <label>Estoque<input id="admin-estoque" type="number" min="0" step="1" required></label>
+            <button type="submit" class="primary-button">Salvar alteração</button>
+          </form>
+          <p id="mensagem-admin" class="mensagem" aria-live="polite"></p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <span>Nexus Store Workspace</span>
+    <span>Projeto acadêmico de persistência poliglota</span>
+  </footer>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>
