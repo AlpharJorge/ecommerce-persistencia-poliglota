@@ -2,20 +2,6 @@
 
 Implementação prática do planejamento de Banco de Dados II. O PostgreSQL é a fonte da verdade para pedidos, pagamentos e estoque; o MongoDB guarda catálogo flexível, carrinhos temporários e cache de páginas.
 
-## O que já está implementado
-
-- PostgreSQL com constraints, chaves estrangeiras, índices, view gerencial, stored function e triggers.
-- Pedido ACID: pedido, itens e pagamento são confirmados juntos ou sofrem rollback.
-- Baixa atômica de estoque: duas compras simultâneas não conseguem vender a mesma última unidade.
-- Auditoria em `inventory_movements`.
-- MongoDB com catálogo de atributos variáveis, carrinhos com TTL de 24 horas e cache com TTL de 10 minutos.
-- Cache-Aside ao consultar produto.
-- Write-Through imediato e outbox transacional para recuperar falhas de sincronização.
-- API Node.js/Express dividida em Controller, Service e Repository.
-- Massa de 100 mil pedidos e benchmark com e sem índice.
-- Teste de carga com throughput e percentis de latência do cache.
-- Docker Compose para subir os três serviços.
-- Documento de arquitetura e modelagem com diagramas ER e de coleções.
 
 ## Execução para avaliação no Windows (sem Docker)
 
@@ -25,7 +11,6 @@ Este é o procedimento recomendado para executar o projeto em um computador novo
 
 Instale os programas abaixo usando as opções padrão:
 
-- [Git para Windows](https://git-scm.com/download/win)
 - [Node.js](https://nodejs.org/en/download) versão 20 ou superior
 - [PostgreSQL para Windows](https://www.postgresql.org/download/windows/) versão 16 ou superior
 - [MongoDB Community Server](https://www.mongodb.com/try/download/community) versão 7 ou superior
