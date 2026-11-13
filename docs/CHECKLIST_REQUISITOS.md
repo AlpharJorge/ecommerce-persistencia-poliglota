@@ -22,4 +22,4 @@
 | Teste de consistência concorrente | Atendido e executado | Uma compra aprovada e uma resposta HTTP 409 |
 | Diagrama ER | Atendido | Mermaid em `ARQUITETURA_E_MODELAGEM.md` |
 | Diagrama de coleções | Atendido | Mermaid em `ARQUITETURA_E_MODELAGEM.md` |
-| Vídeo ou apresentação do MVP | Atendido | Apresentação final em `entrega/Apresentacao_Projeto_Banco_de_Dados_II.pptx` |
+| Repositório e documentação final | Em preparação | README detalhado, relatório técnico, resultados e histórico Git |
