@@ -36,4 +36,19 @@ function requireMoney(value, field) {
   return number.toFixed(2);
 }
 
-module.exports = { requireUuid, normalizeItems, requireMoney };
+function requireStockDelta(value) {
+  const delta = Number(value);
+
+  if (!Number.isInteger(delta) || delta === 0) {
+    throw new HttpError(400, 'delta deve ser um inteiro diferente de zero');
+  }
+
+  return delta;
+}
+
+module.exports = {
+  requireUuid,
+  normalizeItems,
+  requireMoney,
+  requireStockDelta
+};

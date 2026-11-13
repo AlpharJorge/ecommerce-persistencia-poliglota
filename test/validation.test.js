@@ -1,6 +1,11 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const { normalizeItems, requireUuid, requireMoney } = require('../src/utils/validation');
+const {
+  normalizeItems,
+  requireUuid,
+  requireMoney,
+  requireStockDelta
+} = require('../src/utils/validation');
 
 test('combina produtos repetidos no pedido', () => {
   const id = '10000000-0000-0000-0000-000000000001';
@@ -20,4 +25,13 @@ test('valida UUID e dinheiro', () => {
   assert.equal(requireUuid('10000000-0000-0000-0000-000000000001', 'id'), '10000000-0000-0000-0000-000000000001');
   assert.equal(requireMoney('19.9', 'price'), '19.90');
   assert.throws(() => requireUuid('invalido', 'id'), /UUID/);
+});
+
+test('valida ajuste de estoque', () => {
+  assert.equal(requireStockDelta(5), 5);
+  assert.equal(requireStockDelta(-3), -3);
+
+  assert.throws(() => requireStockDelta(0), /delta/);
+  assert.throws(() => requireStockDelta(1.5), /delta/);
+  assert.throws(() => requireStockDelta('texto'), /delta/);
 });
